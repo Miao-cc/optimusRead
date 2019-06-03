@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="mcc">
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Usage - OPTIMUS</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Usage";
+    var mkdocs_page_input_path = "usage.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> OPTIMUS</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">OPTIMUS</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../start/">Start</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Usage</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#basic-usage-of-the-software">Basic usage of the software</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#aoverview-of-simulating-pulsar-search-mode-data-files">a.Overview of simulating pulsar search mode data files</a></li>
+        
+            <li><a class="toctree-l3" href="#bsimulating-system-noise">b.Simulating system noise</a></li>
+        
+            <li><a class="toctree-l3" href="#ckeeping-track-of-the-binary-files">c.Keeping track of the binary files</a></li>
+        
+            <li><a class="toctree-l3" href="#dcreating-a-psrfits-search-mode-file">d.Creating a PSRFITS search mode file</a></li>
+        
+            <li><a class="toctree-l3" href="#eadding-a-simple-pulsar">e.Adding a simple pulsar</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">OPTIMUS</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Usage</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="basic-usage-of-the-software">Basic usage of the software</h2>
+<h3 id="aoverview-of-simulating-pulsar-search-mode-data-files">a.Overview of simulating pulsar search mode data files</h3>
+<p>Search-mode data files can be simulated using the simulateSearch package. As with almost all pulsar software packages, simulateSearch is still unde development. The software provides tools for the user to simulate:
+- pulse sequences from pulsars
+- calibration sources
+- receiver and sky noise
+- a particular survey strategy (i.e., pointed observations or drift-scans)
+- different receivers (single pixel, wide-band, multibeams, etc.)
+- backends (specific time sampling, number of frequency channels, digitisation etc.)
+  The different sources are simulated independently and then those signals can be added together with different simulated backend systems or with different observing strategies. The resulting data files are PSRFITS-format search mode data files.</p>
+<h3 id="bsimulating-system-noise">b.Simulating system noise</h3>
+<p>Simulating system noise is trivial:</p>
+<blockquote>
+<p><code>optimus]$ ./simulateSystemNoise -o snoise.dat</code></p>
+</blockquote>
+<p>This will use default options for the properties of the noise (in this case the default is to produce Gaussian random noise with a mean of 0 and a standard deviation of 1). </p>
+<p>The "-o" command line argument provides the output data file (in this case snoise.dat). This is a binary data file and cannot be directly viewed. This binary file is required for later processing, but it is useful for the user simply to check that the simulated noise looks reasonable. To do this we can write a small part of the data in text format using the "text output" command line argument (-to):</p>
+<blockquote>
+<p><code>optimus]$ ./simulateSystemNoise -o snoise.dat -to snoise.txt 0 3 0 3</code></p>
+</blockquote>
+<p>This will write, in plain text format, to the file snoise.txt. As the data file will become huge we have requested only a time range between 0 and 3 seconds and frequency channels between 0 and 3 (the last two values on the command line). </p>
+<p>This text file can be plotted in e.g., gnuplot to give:</p>
+<blockquote>
+<p><code>gnuplot&gt; plot "snoise.txt" using 1:2</code></p>
+</blockquote>
+<p>This should give an output similar to: figure1.pdf</p>
+<p>We confirm that the data is noise like, has a mean of zero and rms of 1. The time axis (in seconds) represents the requested three seconds of data.  Note that neither the binary data file nor the text file can be used in standard pulsar software packages such as presto. To do that we need to convert the binary data file into PSRFITS format.</p>
+<h3 id="ckeeping-track-of-the-binary-files">c.Keeping track of the binary files</h3>
+<p>The simulateSearch software package produces binary data files. These files can become confusing if a large number are made. In order to inspect the content of a particular file you can use the inspectBinaryFile code:</p>
+<blockquote>
+<p><code>optimus]$ ./inspectBinaryFile -f snoise.dat</code></p>
+</blockquote>
+<p>The output will list the time span of the data file, the sampling time, the observing band, number of channels and whether this particular file corresponds to a particular sky direction (note that pulsar signals clearly relate to the position of the pulsar, whereas system noise is not position-dependent).</p>
+<p>A typical output is:</p>
+<pre><code>        Format:       FORMAT 1
+        Name:         Parkes system
+        t0 (sec):     0.000000
+        t1 (sec):     30.000000
+        tsamp (sec):  0.00025
+        f1 (MHz):     1518.000000
+        f2 (MHz):     1230.000000
+        nchan:        96
+        RAJ (rad):    0
+        DECJ (rad):   0
+        Use angle:    0
+        Random seed:  -1499991522
+</code></pre>
+<h3 id="dcreating-a-psrfits-search-mode-file">d.Creating a PSRFITS search mode file</h3>
+<p>In order to use the output of the simulation in standard pulsar search-mode visualisation or processing packages we need to produce an output file in the PSRFITS search mode format. The PSRFITS search-mode data files are usually recorded as 1, 2, 4 or 8 bit values. Using such low bit numbers requires a way to define exactly what the individual bits mean. The simulateSearch software does not do this in an ideal manner yet. However, for this simple example let's make a simple 1-bit data file:</p>
+<blockquote>
+<p><code>optimus]$ ./createSearchFile -o search.sf -f snoise.dat</code></p>
+</blockquote>
+<p>This command will load in the binary data file (snoise.dat) and produce a PSRFITS search mode file with filename "search.sf".</p>
+<p>The createSearchFile software requires information on the PSRFITS format. This comes from a file: psrheader.fits. For now this file (which comes with thesoftware distribution) needs to be in the local directory when running the code Standard visualisation tools can be used to view this PSRFITS search-mode file. A simple plot can be produced using</p>
+<blockquote>
+<p><code>pfits_plot -f search.sf -s1 1 -s2 1</code></p>
+</blockquote>
+<p>This should produce a plot similar to: figure2.png</p>
+<p>Here the x-axis represents the time samples and the y-axis represents the frequency channels. Each point is either a 0 (white) or a 1 (yellow). As only system noise was simulated the pulsar search software (presto/sigproc) should not be able to find a pulsar in this data set.</p>
+<h3 id="eadding-a-simple-pulsar">e.Adding a simple pulsar</h3>
+<p>The software provides two methods for simulating pulsars - a quick and easy way (as described here) and a more complex (and slower) method. To create a default pulsar we can type:</p>
+<p>optimus]$ ./simulateSimplePsr -o pulsar.dat</p>
+<p>This produces a binary data file (pulsar.dat)  We can now produce a PSRFITS search mode file containing the system noise and the pulsar signal using:</p>
+<p>optimus]$ ./createSearchFile -o search.sf -f snoise.dat -f pulsar.dat</p>
+<p>We can view this with</p>
+<blockquote>
+<p>p<code>fits_plot -f search.sf -s1 1 -s2 1</code></p>
+</blockquote>
+<p>to get a plot similar to the following in which the pulses from the simulated pulsar are clearly detectable:</p>
+<p>The default amplitude for the pulses is 3 (in arbitrary units), a period of 0.3 seconds and a dispersion measure 50cm-3pc.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../start/" class="btn btn-neutral" title="Start"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../start/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>
