@@ -234,10 +234,182 @@
 </li>
 <li>usage: <ul>
 <li>./simulatesimplepsr_mcc -p [observing sys parameter file <em>.params] -p [pulsar parameter file </em>.params] -o [binary file *.dat]</li>
-<li>./simulatesimplepsr -p FAST.params -p pulsar.params -o pulsar.dat</li>
+<li>./simulatesimplepsr_mcc -p FAST.params -p pulsar.params -o pulsar.dat</li>
 </ul>
 </li>
 <li>out: *.dat</li>
+</ul>
+</li>
+<li>
+<p>beamWeightMould.py</p>
+<ul>
+<li>function: <ul>
+<li>Return the beam weight function for FAST (useful for pulsar drifting scan data simulation).</li>
+</ul>
+</li>
+<li>usage1:<ul>
+<li>Out put a binary file noBeamWeight.dat. Edit the file to change out file name and parameter settings</li>
+<li>python beamWeightMould.py</li>
+</ul>
+</li>
+<li>usage2:<ul>
+<li>Import the module in a python file. Return a numpy array (N x M, N:Spectra per file; M:Number of channels). Default input scale = 1, percent =0, flag = 1.</li>
+<li>from beamWeightMould import *</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code class="python2.7">#scale: Max value of the weight func (Normalized). (0 ~ 1, default: 1)
+#percent: The time of center Drift func. (0 ~ 1, default: 0)
+#flag: The func switch. 1: no using the drifting func. 0: using the drifting. (0/1, default: 1)
+
+ &gt;&gt; from beamWeightMould import *
+ &gt;&gt; beamWeight(filename, scale=1, percent=0, flag=1)
+</code></pre>
+
+<ul>
+<li>
+<p>fitsio_combinePolBinary.py:</p>
+<ul>
+<li>function: <ul>
+<li>combine fits file with binary file to a new file with one pol.</li>
+</ul>
+</li>
+<li>usage: <ul>
+<li>python *.py fitsfile binaryfile combinedfile</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>fitsio_combinePolBinaryV1.py</p>
+<ul>
+<li>function: <ul>
+<li>combine fits file with binary file to a new file with one pol. Adding the beam weight moudle to the simulsation data.</li>
+</ul>
+</li>
+<li>usage1: <ul>
+<li>combine the fits file and binary file without beam weight.</li>
+<li>python *.py fitsfile binaryfile combinedfile</li>
+</ul>
+</li>
+<li>usage2: <ul>
+<li>combine the fits file and binary file with beam weight.</li>
+<li>python *.py fitsfile binaryfile beamWeightfile combinedfile</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>fitsio_cutfreq.py:</p>
+<ul>
+<li>function: <ul>
+<li>cut file only have one pol.</li>
+</ul>
+</li>
+<li>usage: <ul>
+<li>python *.py filename startfref endfref newfile</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>fitsio_cut_freq_time_splitpol.py:</p>
+<ul>
+<li>function: <ul>
+<li>cut file have two pols.</li>
+</ul>
+</li>
+<li>usage: <ul>
+<li>python *.py filename startchan endchan startTime endTime filename</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>fastFitsCut.py:</p>
+<ul>
+<li>function: <ul>
+<li>cut file have two pols. Same function as fitsio_cut_freq_time_splitpol.py but more faster.</li>
+</ul>
+</li>
+<li>
+<p>usage:</p>
+<ul>
+<li>python fastFitsCut.py [-f1 startchannel] [-f2 endchannel] [-t1 startsubint] [-t2 endsubint] FAST.fits</li>
+<li>python fastFitsCut.py -[help/version]
+example:</li>
+<li>python fastFitsCut.py -f1 1000 -f2 3000 -t1 0 -t2 31 FAST.fits</li>
+<li>python fastFitsCut.py -f1 1000 FAST.fits (From channel 1000 to end. All subint)</li>
+</ul>
+<p>(if someone lost, the input will be set to a default num.)</p>
+</li>
+</ul>
+</li>
+<li>
+<p>get_bandpass.py: </p>
+<ul>
+<li>function: <ul>
+<li>get bandpass from fits file.</li>
+</ul>
+</li>
+<li>usage: <ul>
+<li>def function can be found in fitsio_combinePolBinary.py</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>get_nos.py: </p>
+<ul>
+<li>function: <ul>
+<li>get signal and noise from fits file.</li>
+</ul>
+</li>
+<li>usage: <ul>
+<li>def function can be found in fitsio_combinePolBinary.py</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>plotbinary.py: </p>
+<ul>
+<li>function: <ul>
+<li>plot one channel of the binary file(create by simulateSimplePsr_mcc).</li>
+</ul>
+</li>
+<li>usage: <ul>
+<li>python plotbinary.py binaryfile</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>plotfits.py: </p>
+<ul>
+<li>function: <ul>
+<li>plot fast fits files.</li>
+</ul>
+</li>
+<li>usage: <ul>
+<li>python plotfits.py filename</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>plotfits2png.py</p>
+<ul>
+<li>function: <ul>
+<li>plot fast fits files to png.</li>
+</ul>
+</li>
+<li>usage: <ul>
+<li>python plotfits2png.py filename</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -289,5 +461,5 @@
 
 <!--
 MkDocs version : 1.0.4
-Build Date UTC : 2019-06-03 01:40:01
+Build Date UTC : 2019-06-03 03:16:42
 -->
