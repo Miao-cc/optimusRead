@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="mcc">
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Sensitivity Test - OPTIMUS</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Sensitivity Test";
+    var mkdocs_page_input_path = "sensitivity.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/bash.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> OPTIMUS</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Index</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../start/">Start</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../usage/">Usage</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Sensitivity Test</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#sensitivity-test">Sensitivity Test</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#usage">Usage</a></li>
+        
+            <li><a class="toctree-l3" href="#prepare-the-files">Prepare the files</a></li>
+        
+            <li><a class="toctree-l3" href="#simulate-a-pulsar">Simulate a pulsar</a></li>
+        
+            <li><a class="toctree-l3" href="#create-beam-weight-module">Create beam weight module</a></li>
+        
+            <li><a class="toctree-l3" href="#adding-a-simple-pulsar">Adding a simple pulsar</a></li>
+        
+            <li><a class="toctree-l3" href="#fold-data">Fold data</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">OPTIMUS</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Sensitivity Test</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="sensitivity-test">Sensitivity Test</h1>
+<h2 id="usage">Usage</h2>
+<ul>
+<li>
+<p>simulateSimplePsr_mcc:</p>
+<ul>
+<li>function: <ul>
+<li>(usage) simulate the pulsar with the parameters in the parameter file (called pulsar1.params)</li>
+</ul>
+</li>
+<li>usage: <ul>
+<li>./simulatesimplepsr_mcc -p [observing sys parameter file <em>.params] -p [pulsar parameter file </em>.params] -o [binary file *.dat]</li>
+<li>./simulatesimplepsr_mcc -p FAST.params -p pulsar.params -o pulsar.dat</li>
+</ul>
+</li>
+<li>out: *.dat</li>
+</ul>
+</li>
+<li>
+<p>beamWeightMould.py</p>
+<ul>
+<li>function: <ul>
+<li>Return the beam weight function for FAST (useful for pulsar drifting scan data simulation).</li>
+</ul>
+</li>
+<li>usage1:<ul>
+<li>Out put a binary file noBeamWeight.dat. Edit the file to change out file name and parameter settings</li>
+<li>python beamWeightMould.py</li>
+</ul>
+</li>
+<li>usage2:<ul>
+<li>Import the module in a python file. Return a numpy array (N x M, N:Spectra per file; M:Number of channels). Default input scale = 1, percent =0, flag = 1.</li>
+<li>from beamWeightMould import *</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code class="python2.7">#scale: Max value of the weight func (Normalized). (0 ~ 1, default: 1)
+#percent: The time of center Drift func. (0 ~ 1, default: 0)
+#flag: The func switch. 1: no using the drifting func. 0: using the drifting. (0/1, default: 1)
+
+ &gt;&gt; from beamWeightMould import *
+ &gt;&gt; beamWeight(filename, scale=1, percent=0, flag=1)
+</code></pre>
+
+<ul>
+<li>
+<p>fitsio_combinePolBinary.py:</p>
+<ul>
+<li>function: <ul>
+<li>combine fits file with binary file to a new file with one pol.</li>
+</ul>
+</li>
+<li>usage: <ul>
+<li>python *.py fitsfile binaryfile combinedfile</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>fitsio_combinePolBinaryV1.py</p>
+<ul>
+<li>function: <ul>
+<li>combine fits file with binary file to a new file with one pol. Adding the beam weight moudle to the simulsation data.</li>
+</ul>
+</li>
+<li>usage1: <ul>
+<li>combine the fits file and binary file without beam weight.</li>
+<li>python *.py fitsfile binaryfile combinedfile</li>
+</ul>
+</li>
+<li>usage2: <ul>
+<li>combine the fits file and binary file with beam weight.</li>
+<li>python *.py fitsfile binaryfile beamWeightfile combinedfile</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="prepare-the-files">Prepare the files</h2>
+<ul>
+<li>fits file</li>
+<li>paramter files<ul>
+<li>FAST.params</li>
+<li>pulsar.params</li>
+</ul>
+</li>
+</ul>
+<p>FAST.params</p>
+<pre><code>name: FAST system
+f1: 0.125
+f2: 1024.125
+nchan: 4096
+t0: 0
+t1: 52.4288
+gain: 1
+tsys: 30
+raj: 0
+decj: 0
+useAngle: 0
+tsamp: 0.0002
+</code></pre>
+<hr />
+<p>pulsar.params</p>
+<pre><code>name: J1713+0747
+p0: 0.8
+dm: 20
+raj: 4.510914803
+decj: 0.13602659 
+width: 0.01
+flux: 0.01
+useAngle: 0
+</code></pre>
+<h2 id="simulate-a-pulsar">Simulate a pulsar</h2>
+<blockquote>
+<p><code>simulatesimplepsr_mcc -p FAST.params -p pulsar.params -o pulsar.dat</code></p>
+</blockquote>
+<p>This will out put a binary file.</p>
+<h2 id="create-beam-weight-module">Create beam weight module</h2>
+<blockquote>
+<p><code>python beamWeightMould.py</code></p>
+</blockquote>
+<pre><code class="python2.7">#scale: Max value of the weight func (Normalized). (0 ~ 1, default: 1)
+#percent: The time of center Drift func. (0 ~ 1, default: 0)
+#flag: The func switch. 1: no using the drifting func. 0: using the drifting. (0/1, default: 1)
+
+ &gt;&gt; from beamWeightMould import *
+ &gt;&gt; beamWeight(filename, scale=1, percent=0, flag=1)
+</code></pre>
+
+<p>This python code can create a beam weight module file. The module file will be used in the python program fitsio_combinePolBinaryV1.py.
+For a drifting scan, changing of <code>percent</code> is necessary.</p>
+<h2 id="adding-a-simple-pulsar">Adding a simple pulsar</h2>
+<h4 id="with-beam-weight">With beam weight:</h4>
+<p>Combine fits file with binary file to a new file with one pol. Adding the beam weight moudle to the simulsation data.</p>
+<blockquote>
+<p><code>python fitsio_combinePolBinaryV1.py fitsfile binaryfile beamWeightfile combinedfile</code></p>
+</blockquote>
+<p>This will combine the fits file and binary file with beam weight.
+Combine logic:</p>
+<ol>
+<li>Open the noise file (fitsfile)</li>
+<li>Open the binary file created by simulatesimplepsr_mcc (binaryfile)</li>
+<li>Open the beam weight file created by beamWeightMould.py (beamWeightfile)</li>
+<li>combine the files to the fits file (combinedfile )</li>
+</ol>
+<h4 id="no-beam-weight">No beam weight:</h4>
+<blockquote>
+<p><code>python fitsio_combinePolBinary.py fitsfile binaryfile combinedfile</code></p>
+</blockquote>
+<h2 id="fold-data">Fold data</h2>
+<h3 id="for-fast-uwb-data">For FAST UWB data</h3>
+<ol>
+<li>
+<p>cut file  </p>
+<ul>
+<li>Downsamp_FASTpsrfits_freq_time_splitpol.py (python cut files)</li>
+<li>cut_downsamping.sh (shell cut files)</li>
+<li>filelist.txt</li>
+</ul>
+</li>
+<li>
+<p>fold file</p>
+<ul>
+<li>cutfilelist.txt</li>
+<li>fold.sh (shell fold files)</li>
+</ul>
+</li>
+<li>
+<p>usage</p>
+<ol>
+<li>ls *.fits &gt;  filelist.txt</li>
+<li>sh cut_downsamping.sh</li>
+<li>ls <em>pol1</em>.fits &gt; cutfilelist.txt</li>
+<li>add the period (sec) and dm to the cutfilelist.txt, example: <code>test_DM_16.2_Flux_0.269_P0_4.0s_pol1_M.fits 4.0 16.2</code></li>
+<li>sh fold.sh</li>
+</ol>
+</li>
+</ol>
+<h3 id="for-fast-19-beam-data">For FAST 19-Beam data</h3>
+<ol>
+<li>
+<p>fold file</p>
+<ul>
+<li>cutfilelist.txt</li>
+<li>fold.sh (shell fold files)</li>
+</ul>
+</li>
+<li>
+<p>usage</p>
+<ol>
+<li>ls *.fits &gt;  cutfilelist.txt</li>
+<li>add the period (sec) and dm to the cutfilelist.txt, example: <code>test_DM_16.2_Flux_0.269_P0_4.0s_pol1_M.fits 4.0 16.2</code></li>
+<li>sh fold.sh</li>
+</ol>
+</li>
+</ol>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../usage/" class="btn btn-neutral" title="Usage"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../usage/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>
